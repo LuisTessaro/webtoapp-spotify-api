@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-module.exports = mongoose.model('SmolLinku', {
+module.exports = mongoose.model('Link', {
   url: {
     type: String,
     required: true,
