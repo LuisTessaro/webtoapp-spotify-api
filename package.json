@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app",
-    "dev": "npx nodemon app"
+    "dev": "npx nodemon app",
+    "deploy": "git push heroku master"
   },
   "keywords": [],
   "author": "",
