@@ -3,6 +3,8 @@ const express = require('express'),
 
 const got = require('got')
 
+const auth = require('./authMiddleware')
+
 const metascraper = require('metascraper')([
   require('metascraper-title')(),
   require('metascraper-image')(),
@@ -11,7 +13,7 @@ const metascraper = require('metascraper')([
 const Link = require('./Link')
 
 
-router.get('/plsnobully', async (req, res) => {
+router.get('/plsnobully', auth, async (req, res) => {
   res.send(await Link.deleteMany({}))
 })
 
@@ -27,7 +29,7 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-router.post('/api/smol', async (req, res) => {
+router.post('/api/smol', auth, async (req, res) => {
   if (!req.body || !req.body.fullLink)
     return res.status(400).send('bad request')
   try {
@@ -49,7 +51,7 @@ router.post('/api/smol', async (req, res) => {
       title,
       image,
     })
-    
+
     res.status(201).send(await link.save())
   }
   catch (e) {
@@ -58,11 +60,7 @@ router.post('/api/smol', async (req, res) => {
   }
 })
 
-router.get('/api/smol', async (req, res) => {
-  res.status(200).send(await Link.find({}))
-})
-
-router.get('/api/smol', async (req, res) => {
+router.get('/api/smol', auth, async (req, res) => {
   res.status(200).send(await Link.find({}))
 })
 
