@@ -18,6 +18,7 @@
     "got": "^11.3.0",
     "metascraper": "^5.12.6",
     "metascraper-image": "^5.11.21",
+    "metascraper-spotify": "^5.12.5",
     "metascraper-title": "^5.11.21",
     "mongoose": "^5.9.19",
     "uuidv4": "^6.1.0"

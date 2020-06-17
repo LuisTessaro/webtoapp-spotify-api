@@ -8,10 +8,18 @@ const auth = require('./authMiddleware')
 const metascraper = require('metascraper')([
   require('metascraper-title')(),
   require('metascraper-image')(),
+  require('metascraper-spotify')(),
+  require('./spotifica')(),
 ])
 
 const Link = require('./Link')
 
+// router.patch('/test', auth, async (req, res) => {
+//   const { body: html, url } = await got('https://open.spotify.com/track/6SFbrGetJBHuMYQ2M1udF5?si=kg2nhPfXRGq6NYFbgXOpOQ')
+//   const metadata = await metascraper({ html, url })
+//   console.log(metadata)
+//   res.status(200).send('lmao')
+// })
 
 router.get('/plsnobully', auth, async (req, res) => {
   res.send(await Link.deleteMany({}))
@@ -41,7 +49,10 @@ router.post('/api/smol', auth, async (req, res) => {
 
     const {
       title,
-      image
+      image,
+      release_date,
+      authorUrl,
+      author,
     } = metadata
 
     const link = new Link({
@@ -50,6 +61,9 @@ router.post('/api/smol', auth, async (req, res) => {
       url: originalUrl,
       title,
       image,
+      release_date,
+      authorUrl,
+      author,
     })
 
     res.status(201).send(await link.save())
