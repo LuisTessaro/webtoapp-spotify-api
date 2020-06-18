@@ -23,14 +23,11 @@ module.exports = mongoose.model('Link', {
   },
   release_date: {
     type: String,
-    required: true,
   },
   authorUrl: {
     type: String,
-    required: true,
   },
   author: {
     type: String,
-    required: true,
   },
 })
